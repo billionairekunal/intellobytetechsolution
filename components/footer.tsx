@@ -25,7 +25,7 @@ export function Footer() {
             );
           })}
         </div>
-        <div className="grid gap-12 py-14 lg:grid-cols-[1.4fr_2fr]">
+        <div className="grid grid-cols-1 gap-12 py-14 lg:grid-cols-[1.4fr_2fr]">
           <div>
             <Logo light />
             <p className="display mt-6 max-w-sm text-3xl leading-tight">Pleasure, <em className="text-lime">intelligently</em> designed.</p>

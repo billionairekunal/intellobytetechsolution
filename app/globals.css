@@ -33,9 +33,6 @@ body {
 }
 ::selection { background: var(--color-rose); color: white; }
 
-/* Lenis */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 @utility display { font-family: var(--font-display); letter-spacing: -0.02em; font-optical-sizing: auto; }
 @utility arch { border-radius: 999px 999px 28px 28px; }

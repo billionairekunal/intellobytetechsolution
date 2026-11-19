@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Heart, Home, LayoutGrid, Menu, Minus, Plus, Search, ShieldCheck, ShoppingBag, Truck, User, X } from "lucide-react";
-import Lenis from "lenis";
 import { useStore } from "./store";
 import { Logo, Marquee } from "./ui";
 import { FREE_SHIP, inr } from "@/lib/format";
@@ -22,12 +21,8 @@ const NAV = [
 export function SmoothScroll() {
   const path = usePathname();
   useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    let id = requestAnimationFrame(function raf(t) { lenis.raf(t); id = requestAnimationFrame(raf); });
-    return () => { cancelAnimationFrame(id); lenis.destroy(); };
-  }, []);
-  useEffect(() => { window.scrollTo(0, 0); }, [path]);
+    window.scrollTo(0, 0);
+  }, [path]);
   return null;
 }
 
@@ -167,7 +162,7 @@ export function CartDrawer() {
         <>
           <motion.div className="fixed inset-0 z-50 bg-ink/50 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)} />
           <motion.aside
-            role="dialog" aria-label="Your cart" data-lenis-prevent
+            role="dialog" aria-label="Your cart"
             initial={{ x: "105%" }} animate={{ x: 0 }} exit={{ x: "105%" }} transition={{ type: "spring", stiffness: 260, damping: 32 }}
             className="fixed top-2 right-2 bottom-2 z-50 flex w-[calc(100%-1rem)] max-w-md flex-col overflow-hidden rounded-[2rem] bg-porcelain shadow-2xl"
           >

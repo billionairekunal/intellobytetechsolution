@@ -260,7 +260,7 @@ export function DiscreetStory() {
   const rot = useTransform(scrollYProgress, [0, 1], [-8, 8]);
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-      <div ref={ref} className="grid gap-14 lg:grid-cols-2">
+      <div ref={ref} className="grid grid-cols-1 gap-14 lg:grid-cols-2">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHead kicker="Privacy, obsessively" title="Nobody knows." accent="Except you." sub="We built Intellobyte for people who value their privacy as much as their pleasure." />
           <motion.div style={{ rotate: rot }} className="relative mt-10 hidden aspect-[4/3] max-w-md overflow-hidden rounded-[2rem] bg-[#c9a27e] p-8 shadow-2xl lg:block">

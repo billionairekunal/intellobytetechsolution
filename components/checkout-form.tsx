@@ -38,7 +38,7 @@ export function CheckoutForm({ email, name }: { email: string; name: string }) {
   );
 
   return (
-    <form action={action} className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+    <form action={action} className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr]">
       <input type="hidden" name="items" value={JSON.stringify(cart.map(({ id, qty }) => ({ id, qty })))} />
       <input type="hidden" name="coupon" value={coupon?.code ?? ""} />
       <div className="space-y-6">
@@ -79,7 +79,7 @@ export function CheckoutForm({ email, name }: { email: string; name: string }) {
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <div className="rounded-[2rem] bg-white p-6 sm:p-8">
           <p className="display text-2xl">Order summary</p>
-          <ul className="mt-5 max-h-72 space-y-3 overflow-y-auto" data-lenis-prevent>
+          <ul className="mt-5 max-h-72 space-y-3 overflow-y-auto">
             {cart.map((i) => (
               <li key={i.id} className="flex items-center gap-3">
                 <span className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-sand">

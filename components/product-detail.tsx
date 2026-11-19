@@ -2,7 +2,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { Check, ChevronDown, Heart, Minus, Package, Plus, RotateCcw, ShieldCheck, Truck, Zap } from "lucide-react";
 import { useStore } from "./store";
 import { Reveal, SectionHead, Stars } from "./ui";
@@ -162,14 +163,16 @@ export function BuyBox({ p, upsell }: { p: Product; upsell: Product[] }) {
   );
 }
 
-export function Reviews({ p, reviews, signedIn }: { p: Product; reviews: Review[]; signedIn: boolean }) {
+export function Reviews({ p, reviews }: { p: Product; reviews: Review[] }) {
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => { createClient().auth.getSession().then(({ data }) => setSignedIn(!!data.session)); }, []);
   const [state, action, pending] = useActionState(addReview, null);
   const [rating, setRating] = useState(5);
   const dist = [5, 4, 3, 2, 1].map((s) => [s, reviews.filter((r) => r.rating === s).length] as const);
   return (
     <section id="reviews" className="scroll-mt-28 py-20">
       <SectionHead kicker="Reviews" title="What people" accent="are saying" />
-      <div className="mt-10 grid gap-8 lg:grid-cols-[22rem_1fr]">
+      <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[22rem_1fr]">
         <div className="space-y-4 lg:sticky lg:top-28 lg:self-start">
           <div className="rounded-[2rem] bg-white p-7">
             <p className="display text-7xl">{p.review_count ? p.rating : "–"}</p>

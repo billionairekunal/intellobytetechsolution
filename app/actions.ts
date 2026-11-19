@@ -1,7 +1,7 @@
 "use server";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { adminClient, createClient, getUser, isAdmin } from "@/lib/supabase/server";
 
 type State = { ok: boolean; msg: string } | null;
@@ -88,6 +88,7 @@ export async function addReview(_: State, f: FormData): Promise<State> {
     title: str(f, "title").slice(0, 80) || null, body: str(f, "body").slice(0, 1000) || null,
   });
   if (error) return { ok: false, msg: "Could not save your review." };
+  updateTag("catalog");
   revalidatePath(`/product/${str(f, "slug")}`);
   return { ok: true, msg: "Thanks! Your review is live." };
 }
@@ -110,6 +111,7 @@ export async function updateProduct(f: FormData) {
   const price = Number(f.get("price")), stock = Number(f.get("stock"));
   if (!Number.isInteger(price) || price < 0 || !Number.isInteger(stock) || stock < 0) return;
   await adminClient().from("products").update({ price, stock, active: f.get("active") === "on" }).eq("id", str(f, "id"));
+  updateTag("catalog");
   revalidatePath("/admin/products");
   revalidatePath("/", "layout");
 }

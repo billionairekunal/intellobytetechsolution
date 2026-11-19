@@ -82,7 +82,7 @@ export function ProductGrid({ products, dark }: { products: Product[]; dark?: bo
 
 export function ProductRail({ products, dark }: { products: Product[]; dark?: boolean }) {
   return (
-    <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6" data-lenis-prevent-wheel>
+    <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6">
       {products.map((p, i) => (
         <div key={p.id} className="w-[46vw] shrink-0 snap-start sm:w-64 lg:w-72"><ProductCard p={p} i={i} dark={dark} /></div>
       ))}

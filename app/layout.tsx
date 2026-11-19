@@ -9,6 +9,7 @@ const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", sty
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3005"),
   title: { default: "Intellobyte Toys — Pleasure, intelligently designed", template: "%s · Intellobyte Toys" },
   description: "India's premium destination for body-safe adult toys from LELO, Satisfyer, Womanizer, Lovense, Aneros and more. Discreet packaging, COD, fast delivery.",
   robots: { index: true, follow: true },
