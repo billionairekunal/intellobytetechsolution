@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getUser, isAdmin } from "@/lib/supabase/server";
+import { requireAdminPage } from "@/lib/supabase/server";
 
 export const metadata = { title: "Admin", robots: { index: false } };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const user = await getUser();
-  if (!isAdmin(user?.email)) notFound();
+  await requireAdminPage();
   return (
     <div className="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">

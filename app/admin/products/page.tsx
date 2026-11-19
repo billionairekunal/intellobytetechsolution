@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { adminClient } from "@/lib/supabase/server";
+import { adminClient, requireAdminPage } from "@/lib/supabase/server";
 import { updateProduct } from "@/app/actions";
 
 export default async function AdminProducts() {
+  await requireAdminPage();
   const { data } = await adminClient().from("products").select("id,name,brand,price,stock,active,images").order("name");
   return (
     <div className="overflow-x-auto rounded-[1.75rem] bg-white">

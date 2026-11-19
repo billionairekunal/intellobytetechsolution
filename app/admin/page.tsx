@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { adminClient } from "@/lib/supabase/server";
+import { adminClient, requireAdminPage } from "@/lib/supabase/server";
 import { inr } from "@/lib/format";
 import { updateOrderStatus } from "@/app/actions";
 
 const STATUS = ["placed", "packed", "shipped", "delivered", "cancelled"];
 
 export default async function AdminOrders() {
+  await requireAdminPage();
   const sb = adminClient();
   const { data: orders } = await sb.from("orders").select("id,order_no,name,phone,email,total,status,payment_method,created_at,address,order_items(qty)").order("created_at", { ascending: false }).limit(200);
   const list = orders ?? [];
